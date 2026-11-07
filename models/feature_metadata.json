@@ -1,0 +1,263 @@
+{
+  "features": [
+    {
+      "name": "age",
+      "label": "Student Age",
+      "type": "integer",
+      "min": 17,
+      "max": 25,
+      "step": 1,
+      "default": 20,
+      "unit": "years",
+      "description": "Current age of the student (typically 17\u201325 for university cohorts)."
+    },
+    {
+      "name": "gender",
+      "label": "Gender",
+      "type": "categorical",
+      "options": [
+        "Female",
+        "Male",
+        "Other"
+      ],
+      "default": "Female",
+      "description": "Student gender identity as recorded in demographics."
+    },
+    {
+      "name": "study_hours_per_day",
+      "label": "Daily Study Hours",
+      "type": "float",
+      "min": 0.0,
+      "max": 18.0,
+      "step": 0.1,
+      "default": 4.5,
+      "unit": "hours/day",
+      "description": "Dedicated self-study time per day outside regular scheduled lectures."
+    },
+    {
+      "name": "attendance_percentage",
+      "label": "Attendance Rate",
+      "type": "float",
+      "min": 50.0,
+      "max": 100.0,
+      "step": 0.5,
+      "default": 85.0,
+      "unit": "%",
+      "description": "Percentage of lectures and laboratory sessions attended during the semester."
+    },
+    {
+      "name": "social_media_hours",
+      "label": "Social Media Usage",
+      "type": "float",
+      "min": 0.0,
+      "max": 10.0,
+      "step": 0.1,
+      "default": 2.0,
+      "unit": "hours/day",
+      "description": "Estimated hours spent daily across social platforms and messaging apps."
+    },
+    {
+      "name": "netflix_hours",
+      "label": "Streaming / Netflix Hours",
+      "type": "float",
+      "min": 0.0,
+      "max": 8.0,
+      "step": 0.1,
+      "default": 1.5,
+      "unit": "hours/day",
+      "description": "Average daily hours spent watching streaming series, movies, or video content."
+    },
+    {
+      "name": "sleep_hours",
+      "label": "Nightly Sleep Duration",
+      "type": "float",
+      "min": 3.0,
+      "max": 12.0,
+      "step": 0.5,
+      "default": 7.0,
+      "unit": "hours/night",
+      "description": "Average hours of restorative sleep obtained per night."
+    },
+    {
+      "name": "exercise_frequency",
+      "label": "Weekly Exercise Frequency",
+      "type": "integer",
+      "min": 0,
+      "max": 7,
+      "step": 1,
+      "default": 3,
+      "unit": "days/week",
+      "description": "Number of days per week engaged in physical fitness, sports, or gym exercise."
+    },
+    {
+      "name": "mental_health_rating",
+      "label": "Mental Health Rating",
+      "type": "integer",
+      "min": 1,
+      "max": 10,
+      "step": 1,
+      "default": 7,
+      "unit": "scale (1-10)",
+      "description": "Self-reported emotional and cognitive well-being on a 1 (severely stressed) to 10 (thriving) scale."
+    },
+    {
+      "name": "part_time_job",
+      "label": "Part-Time Employment",
+      "type": "categorical",
+      "options": [
+        "No",
+        "Yes"
+      ],
+      "default": "No",
+      "description": "Whether the student holds part-time employment concurrent with their academic studies."
+    },
+    {
+      "name": "diet_quality",
+      "label": "Diet Quality",
+      "type": "categorical",
+      "options": [
+        "Poor",
+        "Fair",
+        "Good"
+      ],
+      "default": "Good",
+      "description": "General nutritional quality and meal regularity of the student's daily diet."
+    },
+    {
+      "name": "parental_education_level",
+      "label": "Parental Education Level",
+      "type": "categorical",
+      "options": [
+        "No formal education",
+        "High School",
+        "Bachelor",
+        "Master"
+      ],
+      "default": "Bachelor",
+      "description": "Highest formal educational qualification attained by either parent/guardian."
+    },
+    {
+      "name": "internet_quality",
+      "label": "Home Internet Quality",
+      "type": "categorical",
+      "options": [
+        "Poor",
+        "Average",
+        "Good"
+      ],
+      "default": "Good",
+      "description": "Reliability and speed of home internet connection used for coursework and digital research."
+    },
+    {
+      "name": "extracurricular_participation",
+      "label": "Extracurricular Activities",
+      "type": "categorical",
+      "options": [
+        "No",
+        "Yes"
+      ],
+      "default": "No",
+      "description": "Active participation in collegiate clubs, competitions, student government, or volunteer societies."
+    }
+  ],
+  "presets": [
+    {
+      "id": "high_achiever",
+      "label": "High Achiever Profile",
+      "description": "Disciplined student with 6.5 hours of study, 96% attendance, and healthy lifestyle habits.",
+      "data": {
+        "age": 20,
+        "gender": "Female",
+        "study_hours_per_day": 6.5,
+        "social_media_hours": 1.2,
+        "netflix_hours": 0.8,
+        "part_time_job": "No",
+        "attendance_percentage": 96.0,
+        "sleep_hours": 7.5,
+        "diet_quality": "Good",
+        "exercise_frequency": 4,
+        "parental_education_level": "Bachelor",
+        "internet_quality": "Good",
+        "mental_health_rating": 8,
+        "extracurricular_participation": "Yes"
+      }
+    },
+    {
+      "id": "balanced_student",
+      "label": "Balanced Average Student",
+      "description": "Typical student juggling part-time work, 3.8 hours of daily study, and moderate leisure.",
+      "data": {
+        "age": 21,
+        "gender": "Male",
+        "study_hours_per_day": 3.8,
+        "social_media_hours": 2.5,
+        "netflix_hours": 1.8,
+        "part_time_job": "Yes",
+        "attendance_percentage": 84.0,
+        "sleep_hours": 6.5,
+        "diet_quality": "Fair",
+        "exercise_frequency": 2,
+        "parental_education_level": "High School",
+        "internet_quality": "Average",
+        "mental_health_rating": 6,
+        "extracurricular_participation": "No"
+      }
+    },
+    {
+      "id": "at_risk_student",
+      "label": "At-Risk Support Needed",
+      "description": "Student experiencing academic strain with 1.2 hours of study, heavy screen entertainment, and attendance dips.",
+      "data": {
+        "age": 22,
+        "gender": "Other",
+        "study_hours_per_day": 1.2,
+        "social_media_hours": 4.5,
+        "netflix_hours": 3.5,
+        "part_time_job": "Yes",
+        "attendance_percentage": 68.0,
+        "sleep_hours": 5.0,
+        "diet_quality": "Poor",
+        "exercise_frequency": 0,
+        "parental_education_level": "No formal education",
+        "internet_quality": "Poor",
+        "mental_health_rating": 3,
+        "extracurricular_participation": "No"
+      }
+    }
+  ],
+  "model_info": {
+    "name": "Lasso Regularized Regression (L1-penalized)",
+    "selected_reason": "Lowest test error (MAE: 4.33, RMSE: 5.33), highest R\u00b2 (0.889), and superior cross-validation stability without overfitting.",
+    "metrics": {
+      "test_mae": 4.3313,
+      "test_rmse": 5.325,
+      "test_r2": 0.8894,
+      "residual_std": 6.4423,
+      "intercept": 9.8828,
+      "coefficients": {
+        "age": 0.0507,
+        "study_hours_per_day": 8.7965,
+        "social_media_hours": -0.2904,
+        "netflix_hours": 0.0,
+        "part_time_job": 0.0,
+        "attendance_percentage": 0.1298,
+        "sleep_hours": 0.7966,
+        "exercise_frequency": 0.0,
+        "parental_education_level": 0.0,
+        "mental_health_rating": 1.9123,
+        "extracurricular_participation": -0.0,
+        "entertainment_time": -2.3687,
+        "health_score": 1.2307,
+        "gender_Female": -0.0,
+        "gender_Male": 0.0,
+        "gender_Other": 0.0,
+        "diet_quality_Fair": 0.5766,
+        "diet_quality_Good": -0.2589,
+        "diet_quality_Poor": 0.0,
+        "internet_quality_Average": -0.0,
+        "internet_quality_Good": 0.0,
+        "internet_quality_Poor": 0.0
+      }
+    }
+  }
+}

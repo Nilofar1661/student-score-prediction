@@ -1,0 +1,180 @@
+{
+  "dataset_summary": {
+    "total_records": 1000,
+    "train_records": 800,
+    "test_records": 200,
+    "num_features": 22,
+    "feature_columns": [
+      "age",
+      "study_hours_per_day",
+      "social_media_hours",
+      "netflix_hours",
+      "part_time_job",
+      "attendance_percentage",
+      "sleep_hours",
+      "exercise_frequency",
+      "parental_education_level",
+      "mental_health_rating",
+      "extracurricular_participation",
+      "entertainment_time",
+      "health_score",
+      "gender_Female",
+      "gender_Male",
+      "gender_Other",
+      "diet_quality_Fair",
+      "diet_quality_Good",
+      "diet_quality_Poor",
+      "internet_quality_Average",
+      "internet_quality_Good",
+      "internet_quality_Poor"
+    ],
+    "target_variable": "exam_score",
+    "score_range": {
+      "min": 18.4,
+      "max": 100.0,
+      "mean": 69.6015
+    }
+  },
+  "regression_comparison": [
+    {
+      "model_name": "Linear Regression",
+      "cv_mae_mean": 4.6059,
+      "cv_mae_std": 0.4571,
+      "cv_rmse_mean": 6.4596,
+      "cv_rmse_std": 1.793,
+      "cv_r2_mean": 0.8459,
+      "cv_r2_std": 0.0915,
+      "test_mae": 4.3907,
+      "test_rmse": 5.3662,
+      "test_r2": 0.8877,
+      "train_r2_mean": 0.8641,
+      "overfitting_gap": -0.0236
+    },
+    {
+      "model_name": "Ridge Regression",
+      "cv_mae_mean": 4.6057,
+      "cv_mae_std": 0.4561,
+      "cv_rmse_mean": 6.4585,
+      "cv_rmse_std": 1.7897,
+      "cv_r2_mean": 0.846,
+      "cv_r2_std": 0.0913,
+      "test_mae": 4.3912,
+      "test_rmse": 5.3672,
+      "test_r2": 0.8877,
+      "train_r2_mean": 0.8641,
+      "overfitting_gap": -0.0236
+    },
+    {
+      "model_name": "Lasso Regression",
+      "cv_mae_mean": 4.5558,
+      "cv_mae_std": 0.4584,
+      "cv_rmse_mean": 6.3927,
+      "cv_rmse_std": 1.7882,
+      "cv_r2_mean": 0.849,
+      "cv_r2_std": 0.0905,
+      "test_mae": 4.3313,
+      "test_rmse": 5.325,
+      "test_r2": 0.8894,
+      "train_r2_mean": 0.8633,
+      "overfitting_gap": -0.0261
+    },
+    {
+      "model_name": "Decision Tree Regressor",
+      "cv_mae_mean": 7.0693,
+      "cv_mae_std": 0.2138,
+      "cv_rmse_mean": 8.9128,
+      "cv_rmse_std": 0.3361,
+      "cv_r2_mean": 0.7256,
+      "cv_r2_std": 0.019,
+      "test_mae": 6.331,
+      "test_rmse": 8.3586,
+      "test_r2": 0.7275,
+      "train_r2_mean": 0.9031,
+      "overfitting_gap": 0.1756
+    },
+    {
+      "model_name": "Random Forest Regressor",
+      "cv_mae_mean": 5.0525,
+      "cv_mae_std": 0.3396,
+      "cv_rmse_mean": 6.2953,
+      "cv_rmse_std": 0.3486,
+      "cv_r2_mean": 0.8627,
+      "cv_r2_std": 0.0166,
+      "test_mae": 4.6007,
+      "test_rmse": 5.6737,
+      "test_r2": 0.8745,
+      "train_r2_mean": 0.9792,
+      "overfitting_gap": 0.1047
+    },
+    {
+      "model_name": "Gradient Boosting Regressor",
+      "cv_mae_mean": 4.767,
+      "cv_mae_std": 0.361,
+      "cv_rmse_mean": 5.9762,
+      "cv_rmse_std": 0.3775,
+      "cv_r2_mean": 0.8765,
+      "cv_r2_std": 0.0143,
+      "test_mae": 4.6177,
+      "test_rmse": 5.6057,
+      "test_r2": 0.8775,
+      "train_r2_mean": 0.9756,
+      "overfitting_gap": 0.0981
+    }
+  ],
+  "classification_comparison": [
+    {
+      "model_name": "Logistic Regression",
+      "accuracy": 0.945,
+      "precision": 0.9763,
+      "recall": 0.9593,
+      "f1_score": 0.9677,
+      "roc_auc": 0.9815,
+      "error_rate": 0.055
+    },
+    {
+      "model_name": "Decision Tree Classifier",
+      "accuracy": 0.92,
+      "precision": 0.9382,
+      "recall": 0.9709,
+      "f1_score": 0.9543,
+      "roc_auc": 0.8973,
+      "error_rate": 0.08
+    },
+    {
+      "model_name": "Random Forest Classifier",
+      "accuracy": 0.915,
+      "precision": 0.9144,
+      "recall": 0.9942,
+      "f1_score": 0.9526,
+      "roc_auc": 0.9726,
+      "error_rate": 0.085
+    },
+    {
+      "model_name": "Gradient Boosting Classifier",
+      "accuracy": 0.925,
+      "precision": 0.9486,
+      "recall": 0.9651,
+      "f1_score": 0.9568,
+      "roc_auc": 0.9724,
+      "error_rate": 0.075
+    }
+  ],
+  "selected_model": {
+    "model_name": "Lasso Regression",
+    "rationale": "Selected Lasso Regression because it achieved the lowest Test RMSE (5.325) and Test MAE (4.3313), highest Test R\u00b2 (0.8894), and superior 5-fold CV stability (CV RMSE: 6.3927 \u00b1 1.7882). It generalizes effectively with minimal overfitting gap (-0.0261) and handles non-linear interactions cleanly.",
+    "metrics": {
+      "model_name": "Lasso Regression",
+      "cv_mae_mean": 4.5558,
+      "cv_mae_std": 0.4584,
+      "cv_rmse_mean": 6.3927,
+      "cv_rmse_std": 1.7882,
+      "cv_r2_mean": 0.849,
+      "cv_r2_std": 0.0905,
+      "test_mae": 4.3313,
+      "test_rmse": 5.325,
+      "test_r2": 0.8894,
+      "train_r2_mean": 0.8633,
+      "overfitting_gap": -0.0261
+    }
+  }
+}

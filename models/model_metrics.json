@@ -1,0 +1,31 @@
+{
+  "test_mae": 4.3313,
+  "test_rmse": 5.325,
+  "test_r2": 0.8894,
+  "residual_std": 6.4423,
+  "intercept": 9.8828,
+  "coefficients": {
+    "age": 0.0507,
+    "study_hours_per_day": 8.7965,
+    "social_media_hours": -0.2904,
+    "netflix_hours": 0.0,
+    "part_time_job": 0.0,
+    "attendance_percentage": 0.1298,
+    "sleep_hours": 0.7966,
+    "exercise_frequency": 0.0,
+    "parental_education_level": 0.0,
+    "mental_health_rating": 1.9123,
+    "extracurricular_participation": -0.0,
+    "entertainment_time": -2.3687,
+    "health_score": 1.2307,
+    "gender_Female": -0.0,
+    "gender_Male": 0.0,
+    "gender_Other": 0.0,
+    "diet_quality_Fair": 0.5766,
+    "diet_quality_Good": -0.2589,
+    "diet_quality_Poor": 0.0,
+    "internet_quality_Average": -0.0,
+    "internet_quality_Good": 0.0,
+    "internet_quality_Poor": 0.0
+  }
+}
