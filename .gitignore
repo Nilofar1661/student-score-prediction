@@ -1,0 +1,104 @@
+# ==========================================
+# Python & Bytecode
+# ==========================================
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# ==========================================
+# Virtual Environments
+# ==========================================
+venv/
+.venv/
+env/
+ENV/
+env.bak/
+venv.bak/
+
+# ==========================================
+# Environment Variables & Secrets
+# ==========================================
+.env
+.env.local
+.env.*.local
+*.env
+!.env.example
+!frontend/.env.example
+
+# ==========================================
+# Local SQLite Database & Logs
+# ==========================================
+backend/history.db
+*.db
+*.sqlite
+*.sqlite3
+*.log
+
+# ==========================================
+# Testing & Coverage
+# ==========================================
+.pytest_cache/
+.coverage
+htmlcov/
+
+# ==========================================
+# Frontend & Node Dependencies
+# ==========================================
+node_modules/
+frontend/node_modules/
+frontend/dist/
+frontend/dist-ssr/
+frontend/*.local
+
+# ==========================================
+# OS & Editor Artifacts
+# ==========================================
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/*
+!.vscode/extensions.json
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# ==========================================
+# Preserved Machine Learning & Data Artifacts
+# ==========================================
+!models/model_pipeline.joblib
+!models/feature_metadata.json
+!models/model_metrics.json
+!reports/*.json
+!reports/*.md
+!data/*.csv
+
+# ==========================================
+# Preserved Power BI Dashboards & Visuals
+# ==========================================
+!*.pbix
+!*.pbit
+!*.xlsx
+!*dashboard*
+!*screenshot*
+

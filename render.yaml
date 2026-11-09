@@ -1,0 +1,44 @@
+# Render Blueprint configuration for Student Score Prediction
+# Deploys FastAPI Backend and React Frontend separately
+version: "1"
+
+services:
+  # ---------------------------------------------------------------------------
+  # 1. FastAPI Backend Web Service
+  # ---------------------------------------------------------------------------
+  - type: web
+    name: student-score-prediction-api
+    runtime: python
+    plan: free
+    region: oregon
+    rootDir: .
+    buildCommand: pip install -r backend/requirements.txt
+    startCommand: uvicorn backend.main:app --host 0.0.0.0 --port $PORT
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.11.9
+      - key: ALLOWED_ORIGINS
+        sync: false
+
+  # ---------------------------------------------------------------------------
+  # 2. React + Vite Frontend Static Site
+  # ---------------------------------------------------------------------------
+  - type: web
+    name: student-score-prediction-frontend
+    runtime: static
+    plan: free
+    region: oregon
+    rootDir: frontend
+    buildCommand: npm install && npm run build
+    staticPublishPath: dist
+    routes:
+      - type: rewrite
+        source: /*
+        destination: /index.html
+    envVars:
+      - key: VITE_API_URL
+        fromService:
+          type: web
+          name: student-score-prediction-api
+          property: host
+

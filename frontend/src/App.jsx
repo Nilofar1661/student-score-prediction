@@ -24,6 +24,9 @@ const DEFAULT_STUDENT = {
   extracurricular_participation: 'No'
 };
 
+// Base API URL configuration supporting Render deployment & local Vite development
+const API_BASE_URL = (import.meta.env.VITE_API_URL || '').replace(/\/+$/, '');
+
 export default function App() {
   const [activeTab, setActiveTab] = useState('predict');
   const [formData, setFormData] = useState(DEFAULT_STUDENT);
@@ -35,17 +38,9 @@ export default function App() {
   const [isLoading, setIsLoading] = useState(false);
   const [apiError, setApiError] = useState(null);
 
-  // Initial data loading
-  useEffect(() => {
-    fetchHealth();
-    fetchMetadata();
-    fetchInsights();
-    fetchHistory();
-  }, []);
-
   const fetchHealth = async () => {
     try {
-      const res = await fetch('/api/health');
+      const res = await fetch(`${API_BASE_URL}/api/health`);
       if (res.ok) {
         const data = await res.json();
         setHealthStatus(data);
@@ -57,7 +52,7 @@ export default function App() {
 
   const fetchMetadata = async () => {
     try {
-      const res = await fetch('/api/metadata');
+      const res = await fetch(`${API_BASE_URL}/api/metadata`);
       if (res.ok) {
         const data = await res.json();
         setMetadata(data);
@@ -69,7 +64,7 @@ export default function App() {
 
   const fetchInsights = async () => {
     try {
-      const res = await fetch('/api/insights');
+      const res = await fetch(`${API_BASE_URL}/api/insights`);
       if (res.ok) {
         const data = await res.json();
         setInsights(data);
@@ -81,7 +76,7 @@ export default function App() {
 
   const fetchHistory = async () => {
     try {
-      const res = await fetch('/api/history');
+      const res = await fetch(`${API_BASE_URL}/api/history`);
       if (res.ok) {
         const data = await res.json();
         setHistory(data);
@@ -91,11 +86,19 @@ export default function App() {
     }
   };
 
+  // Initial data loading
+  useEffect(() => {
+    fetchHealth();
+    fetchMetadata();
+    fetchInsights();
+    fetchHistory();
+  }, []);
+
   const handlePredict = async (payload) => {
     setIsLoading(true);
     setApiError(null);
     try {
-      const res = await fetch('/api/predict', {
+      const res = await fetch(`${API_BASE_URL}/api/predict`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(payload)
@@ -118,7 +121,10 @@ export default function App() {
         }
       }, 100);
     } catch (err) {
-      setApiError(err.message || 'Error connecting to prediction server.');
+      const hint = !API_BASE_URL && window.location.hostname !== 'localhost' && window.location.hostname !== '127.0.0.1'
+        ? ' (Check VITE_API_URL on Render frontend)'
+        : '';
+      setApiError((err.message || 'Error connecting to prediction server.') + hint);
     } finally {
       setIsLoading(false);
     }
@@ -139,7 +145,7 @@ export default function App() {
 
   const handleDeleteHistory = async (id) => {
     try {
-      const res = await fetch(`/api/history/${id}`, { method: 'DELETE' });
+      const res = await fetch(`${API_BASE_URL}/api/history/${id}`, { method: 'DELETE' });
       if (res.ok) {
         setHistory(prev => prev.filter(item => item.id !== id));
       }
@@ -150,7 +156,7 @@ export default function App() {
 
   const handleClearHistory = async () => {
     try {
-      const res = await fetch('/api/history', { method: 'DELETE' });
+      const res = await fetch(`${API_BASE_URL}/api/history`, { method: 'DELETE' });
       if (res.ok) {
         setHistory([]);
       }

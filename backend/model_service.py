@@ -5,6 +5,7 @@ Defines feature transformations, prediction orchestration, and artifact loading.
 
 import json
 import logging
+import sys
 import uuid
 from datetime import datetime, timezone
 from pathlib import Path
@@ -17,13 +18,30 @@ from sklearn.base import BaseEstimator, TransformerMixin
 
 logger = logging.getLogger("model_service")
 
+# Ensure repository root is on sys.path for unpickling & portable imports
 BASE_DIR = Path(__file__).resolve().parent.parent
+if str(BASE_DIR) not in sys.path:
+    sys.path.insert(0, str(BASE_DIR))
+
+def _resolve_artifact_path(relative_path: str) -> Path:
+    """Robustly resolve artifact path across diverse cloud deployment working directories."""
+    candidates = [
+        BASE_DIR / relative_path,
+        Path.cwd() / relative_path,
+        Path(__file__).resolve().parent / relative_path,
+        Path.cwd() / ".." / relative_path,
+    ]
+    for candidate in candidates:
+        if candidate.exists():
+            return candidate.resolve()
+    return (BASE_DIR / relative_path).resolve()
+
 MODELS_DIR = BASE_DIR / "models"
 REPORTS_DIR = BASE_DIR / "reports"
-MODEL_PATH = MODELS_DIR / "model_pipeline.joblib"
-METADATA_PATH = MODELS_DIR / "feature_metadata.json"
-EDA_PATH = REPORTS_DIR / "eda_summary.json"
-MODEL_COMPARISON_PATH = REPORTS_DIR / "model_comparison.json"
+MODEL_PATH = _resolve_artifact_path("models/model_pipeline.joblib")
+METADATA_PATH = _resolve_artifact_path("models/feature_metadata.json")
+EDA_PATH = _resolve_artifact_path("reports/eda_summary.json")
+MODEL_COMPARISON_PATH = _resolve_artifact_path("reports/model_comparison.json")
 
 FEATURE_NAMES = [
     'age', 'study_hours_per_day', 'social_media_hours', 'netflix_hours',
@@ -246,16 +264,20 @@ class ModelService:
 
     def _load(self):
         """Loads model pipeline and metadata from disk."""
-        if not MODEL_PATH.exists():
-            logger.warning(f"Model file not found at {MODEL_PATH}. Attempting to trigger training pipeline...")
+        model_path = _resolve_artifact_path("models/model_pipeline.joblib")
+        metadata_path = _resolve_artifact_path("models/feature_metadata.json")
+
+        if not model_path.exists():
+            logger.warning(f"Model file not found at {model_path}. Attempting to trigger training pipeline...")
             from training.train_pipeline import train_and_save
             train_and_save()
+            model_path = _resolve_artifact_path("models/model_pipeline.joblib")
 
-        logger.info(f"Loading production model from {MODEL_PATH}")
-        self._predictor = joblib.load(MODEL_PATH)
+        logger.info(f"Loading production model from {model_path}")
+        self._predictor = joblib.load(model_path)
 
-        if METADATA_PATH.exists():
-            with open(METADATA_PATH, "r", encoding="utf-8") as f:
+        if metadata_path.exists():
+            with open(metadata_path, "r", encoding="utf-8") as f:
                 self._metadata = json.load(f)
         else:
             self._metadata = {}
@@ -265,11 +287,14 @@ class ModelService:
     def _refresh_insights(self):
         comparison = {}
         eda = {}
-        if MODEL_COMPARISON_PATH.exists():
-            with open(MODEL_COMPARISON_PATH, "r", encoding="utf-8") as f:
+        comparison_path = _resolve_artifact_path("reports/model_comparison.json")
+        eda_path = _resolve_artifact_path("reports/eda_summary.json")
+
+        if comparison_path.exists():
+            with open(comparison_path, "r", encoding="utf-8") as f:
                 comparison = json.load(f)
-        if EDA_PATH.exists():
-            with open(EDA_PATH, "r", encoding="utf-8") as f:
+        if eda_path.exists():
+            with open(eda_path, "r", encoding="utf-8") as f:
                 eda = json.load(f)
 
         self._insights = {

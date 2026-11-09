@@ -3,9 +3,17 @@ FastAPI Backend Application for EduPredict - Student Performance Intelligence.
 Serves prediction API, model insights, schema metadata, and prediction history.
 """
 
+import os
+import sys
 import logging
 from datetime import datetime, timezone
 from typing import List, Dict, Any
+from pathlib import Path
+
+# Ensure repository root is on sys.path for portable imports across environments (Render/Linux/Windows)
+BASE_DIR = Path(__file__).resolve().parent.parent
+if str(BASE_DIR) not in sys.path:
+    sys.path.insert(0, str(BASE_DIR))
 
 from fastapi import FastAPI, HTTPException, status, Request
 from fastapi.middleware.cors import CORSMiddleware
@@ -54,7 +62,14 @@ app = FastAPI(
     lifespan=lifespan
 )
 
-# Narrow CORS configuration for local development
+# CORS configuration: allows localhost for local development, Render deployed frontend, and custom domains
+env_allowed_origins = os.getenv("ALLOWED_ORIGINS", "")
+frontend_url_env = os.getenv("FRONTEND_URL", "").strip()
+
+custom_origins = [origin.strip().rstrip("/") for origin in env_allowed_origins.split(",") if origin.strip()]
+if frontend_url_env and frontend_url_env.rstrip("/") not in custom_origins:
+    custom_origins.append(frontend_url_env.rstrip("/"))
+
 ALLOWED_ORIGINS = [
     "http://localhost:5173",
     "http://127.0.0.1:5173",
@@ -64,9 +79,14 @@ ALLOWED_ORIGINS = [
     "http://127.0.0.1:8000"
 ]
 
+for origin in custom_origins:
+    if origin not in ALLOWED_ORIGINS:
+        ALLOWED_ORIGINS.append(origin)
+
 app.add_middleware(
     CORSMiddleware,
     allow_origins=ALLOWED_ORIGINS,
+    allow_origin_regex=r"^https:\/\/.*\.onrender\.com$",
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -187,3 +207,8 @@ def delete_single_history(prediction_id: str):
     if not deleted:
         raise HTTPException(status_code=404, detail="Prediction record not found.")
     return {"message": f"Prediction {prediction_id} deleted successfully."}
+
+if __name__ == "__main__":
+    import uvicorn
+    port = int(os.getenv("PORT", 8000))
+    uvicorn.run("backend.main:app", host="0.0.0.0", port=port, reload=False)

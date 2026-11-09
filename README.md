@@ -352,6 +352,44 @@ npm run dev
 
 ---
 
+## ☁️ Deploying on Render
+
+Frontend and backend are deployed separately on Render.
+
+### Option A: Automatic Blueprint Deployment (Recommended)
+1. Push your repository to GitHub.
+2. Go to your [Render Dashboard](https://dashboard.render.com/) and click **New +** > **Blueprint**.
+3. Select your repository `student-score-prediction`.
+4. Render automatically parses `render.yaml`, spins up both the **FastAPI Web Service** and **React Static Site**, and connects `VITE_API_URL` dynamically.
+
+---
+
+### Option B: Manual Service Setup
+
+#### 1. Backend Web Service:
+- **Service Type**: Web Service
+- **Runtime**: Python 3
+- **Repository Root**: *(Leave blank / repository root)*
+- **Build Command**: `pip install -r backend/requirements.txt`
+- **Start Command**: `uvicorn backend.main:app --host 0.0.0.0 --port $PORT`
+- **Environment Variables**:
+  - `PYTHON_VERSION`: `3.11.9`
+  - `ALLOWED_ORIGINS`: *(Optional: set if using a custom domain; all `*.onrender.com` frontends are allowed automatically)*
+
+#### 2. Frontend Static Site:
+- **Service Type**: Static Site
+- **Root Directory**: `frontend`
+- **Build Command**: `npm install && npm run build`
+- **Publish Directory**: `dist`
+- **Redirects / Rewrites**:
+  - Type: `Rewrite`
+  - Source: `/*`
+  - Destination: `/index.html`
+- **Environment Variables**:
+  - `VITE_API_URL`: Your deployed backend URL (e.g., `https://student-score-prediction-api.onrender.com`) without a trailing slash.
+
+---
+
 ## 📡 API Reference
 
 ### Health Check

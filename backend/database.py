@@ -11,7 +11,8 @@ from typing import List, Dict, Any, Optional
 DB_PATH = Path(__file__).resolve().parent / "history.db"
 
 def get_connection():
-    conn = sqlite3.connect(DB_PATH)
+    DB_PATH.parent.mkdir(parents=True, exist_ok=True)
+    conn = sqlite3.connect(DB_PATH, timeout=30.0)
     conn.row_factory = sqlite3.Row
     return conn
 
