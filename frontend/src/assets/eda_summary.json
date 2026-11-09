@@ -1,0 +1,60 @@
+{
+  "score_distribution": [
+    { "bin": "0-10", "count": 0 },
+    { "bin": "10-20", "count": 1 },
+    { "bin": "20-30", "count": 10 },
+    { "bin": "30-40", "count": 31 },
+    { "bin": "40-50", "count": 89 },
+    { "bin": "50-60", "count": 149 },
+    { "bin": "60-70", "count": 209 },
+    { "bin": "70-80", "count": 234 },
+    { "bin": "80-90", "count": 151 },
+    { "bin": "90-100", "count": 126 }
+  ],
+  "study_hours_vs_score": [
+    { "bin": "0-2 hrs", "average_score": 46.97 },
+    { "bin": "2-4 hrs", "average_score": 65.96 },
+    { "bin": "4-6 hrs", "average_score": 82.05 },
+    { "bin": "6-8 hrs", "average_score": 97.6 },
+    { "bin": "8+ hrs", "average_score": 100.0 }
+  ],
+  "attendance_vs_score": [
+    { "bin": "50-70%", "average_score": 68.04 },
+    { "bin": "70-80%", "average_score": 68.25 },
+    { "bin": "80-90%", "average_score": 69.42 },
+    { "bin": "90-100%", "average_score": 71.54 }
+  ],
+  "mental_health_vs_score": [
+    { "rating": 1, "average_score": 62.37 },
+    { "rating": 2, "average_score": 63.42 },
+    { "rating": 3, "average_score": 64.48 },
+    { "rating": 4, "average_score": 65.69 },
+    { "rating": 5, "average_score": 66.77 },
+    { "rating": 6, "average_score": 71.09 },
+    { "rating": 7, "average_score": 74.27 },
+    { "rating": 8, "average_score": 74.57 },
+    { "rating": 9, "average_score": 76.89 },
+    { "rating": 10, "average_score": 77.95 }
+  ],
+  "feature_coefficients": [
+    { "feature": "Daily Study Hours", "coefficient": 8.796, "impact": "Strong Positive" },
+    { "feature": "Mental Health Rating", "coefficient": 1.912, "impact": "Positive" },
+    { "feature": "Combined Health Score", "coefficient": 1.231, "impact": "Positive" },
+    { "feature": "Sleep Hours", "coefficient": 0.797, "impact": "Positive" },
+    { "feature": "Attendance Percentage", "coefficient": 0.13, "impact": "Positive" },
+    { "feature": "Fair Diet (vs Poor)", "coefficient": 0.577, "impact": "Mild Positive" },
+    { "feature": "Good Diet (vs Poor)", "coefficient": -0.259, "impact": "Neutral/Mild Negative" },
+    { "feature": "Social Media Distraction", "coefficient": -0.29, "impact": "Negative" },
+    { "feature": "Entertainment Screen Time", "coefficient": -2.369, "impact": "Strong Negative" }
+  ],
+  "dataset_metrics": {
+    "total_students": 1000,
+    "mean_exam_score": 69.6,
+    "median_exam_score": 70.5,
+    "std_exam_score": 16.89,
+    "pass_rate_pct": 86.9,
+    "avg_study_hours": 3.56,
+    "avg_attendance": 84.13
+  }
+}
+
