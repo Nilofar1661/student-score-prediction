@@ -6,7 +6,7 @@ services:
   # ---------------------------------------------------------------------------
   # 1. FastAPI Backend Web Service
   # ---------------------------------------------------------------------------
-  - type: web
+  - type: static
     name: student-score-prediction-api
     runtime: python
     plan: free
@@ -23,7 +23,7 @@ services:
   # ---------------------------------------------------------------------------
   # 2. React + Vite Frontend Static Site
   # ---------------------------------------------------------------------------
-  - type: web
+  - type: static
     name: student-score-prediction-frontend
     runtime: static
     plan: free
